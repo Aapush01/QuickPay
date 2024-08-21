@@ -4,6 +4,15 @@ const dotenv = require('dotenv');
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGODB_URL);
+const db = mongoose.connection;
+
+db.on('connected', () => {
+    console.log("Mongoose connected to MongoDB");
+});
+
+db.on('error', (err) => {
+    console.log(`Monogoose connection error: ${err}`);
+});
 
 //creating schema for user
 
